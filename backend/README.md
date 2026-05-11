@@ -1,4 +1,4 @@
-# Sports Engine Backend
+#  Backend
 
 A comprehensive, production-ready Nest.js backend application showcasing enterprise-grade architecture, modular design patterns, and advanced development practices.
 
