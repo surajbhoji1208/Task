@@ -1,0 +1,31 @@
+import { AppResponse, CommonDropdownResponseDto, CommonSearchResponseDto } from "../../dto";
+import { User } from "../../../server-core/database";
+import { UserStatus, UserTypeEnum } from "../../../server-core/enums";
+import { AppCacheService, AppMailerService } from "../../../server-core/shared-modules";
+import { CreateUserRequestDto } from "./dto/request/create-user.request.dto";
+import { UpdateUserRequestDto } from "./dto/request/update-user.request.dto";
+import { ListUserRequestDto } from "./dto/request/list-user.request.dto";
+import { UserDropdownRequestDto } from "./dto/request/user-dropdown.request.dto";
+import { UserResponseDto } from "./dto/response";
+import { UserRepository } from "./user.repository";
+export declare class UserService {
+    #private;
+    private readonly userRepository;
+    private readonly appCacheService;
+    private readonly appMailerService;
+    private readonly USER_CACHE_MODULE;
+    constructor(userRepository: UserRepository, appCacheService: AppCacheService, appMailerService: AppMailerService);
+    create(createUserData: CreateUserRequestDto): Promise<AppResponse<UserResponseDto>>;
+    private validateEmailUniqueness;
+    update(id: string, updateUserData: UpdateUserRequestDto): Promise<AppResponse<UserResponseDto>>;
+    remove(id: string): Promise<AppResponse<{}>>;
+    findById(id: string): Promise<AppResponse<UserResponseDto>>;
+    findList(searchRequest: ListUserRequestDto): Promise<AppResponse<CommonSearchResponseDto<UserResponseDto>>>;
+    findDropdown(searchRequest: UserDropdownRequestDto): Promise<AppResponse<CommonSearchResponseDto<CommonDropdownResponseDto>>>;
+    findUserByEmail(email: string, userType?: UserTypeEnum): Promise<User | null>;
+    updateUserStatus(userId: string, status: UserStatus): Promise<User>;
+    updateUserPassword(userId: string, newPassword: string): Promise<void>;
+    saveUser(user: User): Promise<User>;
+    findUserById(id: string): Promise<User | null>;
+    exists(id: string): Promise<boolean>;
+}
